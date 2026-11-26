@@ -1,0 +1,3 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+/DefaultBuild/RL78_G22_UART_Transfer.hex -text
