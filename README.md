@@ -22,8 +22,10 @@ Vector values are physical byte addresses, not channel numbers. UART0 carries te
 ## Image and interrupt ownership
 
 Boot is 0x0000..0x1FFF (8 KiB), with at least 512 bytes spare. App vectors are 0x2000..0x20FF, metadata is 0x2100..0x21FF (256 bytes), and App code starts at 0x2200.
-Maximum complete App BIN is 55 KiB; 0x0FC00..0x0FFFF is protected. Size includes vectors, metadata, padding and the four-byte CRC32.
+The paired Boot and App support a complete update BIN of up to 54 KiB (55,296 bytes), including vectors, metadata, padding, and the four-byte CRC32. The App region spans `0x02000` through `0x0F7FF`. The final 2 KiB erase block (`0x0F800` through `0x0FFFF`) is reserved.
 Boot owns physical vectors: AA selects Boot handlers; 55 forwards through the App table. Normal handlers use RETI; BRK retains RETB.
+
+Standalone Transfer uses its own programmer HEX and requires no App BIN.
 
 ## Configuration and application editing
 
